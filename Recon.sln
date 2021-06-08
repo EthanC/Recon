@@ -1,31 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30128.74
+VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recon", "Recon\Recon.csproj", "{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recon", "Recon\Recon.csproj", "{43587939-8CBD-4FF2-9B0C-CAEF2CE5CE68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Debug|x64.ActiveCfg = Debug|x64
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Debug|x64.Build.0 = Debug|x64
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Release|x64.ActiveCfg = Release|x64
-		{E3BD20A3-50FD-4051-96B2-27DCB0519A6F}.Release|x64.Build.0 = Release|x64
+		{43587939-8CBD-4FF2-9B0C-CAEF2CE5CE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43587939-8CBD-4FF2-9B0C-CAEF2CE5CE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43587939-8CBD-4FF2-9B0C-CAEF2CE5CE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43587939-8CBD-4FF2-9B0C-CAEF2CE5CE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B9CD9634-98BE-4CF3-86F6-BCF6F27835B4}
+		SolutionGuid = {29BCA35C-EBD6-42EF-A6E5-830EDD4530F1}
 	EndGlobalSection
 EndGlobal

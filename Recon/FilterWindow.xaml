@@ -1,0 +1,56 @@
+﻿<adonisControls:AdonisWindow
+    x:Class="Recon.FilterWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
+    xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
+    mc:Ignorable="d"
+    
+    IconVisibility="Collapsed"
+    Title="Filter"
+    Width="250"
+    Height="500"
+    MinWidth="250"
+    MinHeight="250"
+    MaxWidth="250"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ToolWindow"
+>
+
+    <adonisControls:AdonisWindow.TitleBarContent>
+        <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+        </StackPanel>
+    </adonisControls:AdonisWindow.TitleBarContent>
+
+    <Window.Style>
+        <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
+    </Window.Style>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Name="FileFilterTypes" Grid.Row="0" Margin="10">
+            <CheckBox Content="Test"/>
+            <!-- https://social.msdn.microsoft.com/Forums/en-US/a355a085-2650-45b6-a75b-b6a298e3f20d/wpf-checkboxlist?forum=wpf -->
+        </Grid>
+
+        <GroupBox Grid.Row="1" adonisExtensions:LayerExtension.IncreaseLayer="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="ButtonFilter" Click="ButtonFilter_Click" Grid.Column="0" Content="Filter" Margin="0, 0, 8, 0"/>
+                <Button Name="ButtonCancel" Click="ButtonCancel_Click" Grid.Column="1" Content="Cancel" Margin="0, 0, 8, 0"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</adonisControls:AdonisWindow>

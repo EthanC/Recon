@@ -1,64 +1,104 @@
-﻿<adonisControls:AdonisWindow x:Class="Recon.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                             xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                             mc:Ignorable="d"
-        Title="Recon" Width="1280" Height="720" MinWidth="768" MinHeight="432" WindowStartupLocation="CenterScreen">
+﻿<adonisControls:AdonisWindow
+    x:Class="Recon.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
+    xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
+    mc:Ignorable="d"
+    
+    Title="Recon"
+    Width="1280"
+    Height="720"
+    MinWidth="768"
+    MinHeight="432"
+    WindowStartupLocation="CenterScreen"
+>
+
+    <adonisControls:AdonisWindow.TitleBarContent>
+        <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+        </StackPanel>
+    </adonisControls:AdonisWindow.TitleBarContent>
 
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}"/>
     </Window.Style>
 
     <Grid>
-        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid DockPanel.Dock="Top">
-                <Menu>
-                    <MenuItem Header="_File">
-                        <MenuItem Name="MenuOpenCASC" Header="_Open CASC..." Click="MenuOpenCASC_Click"/>
-                        <Separator/>
-                        <MenuItem Name="MenuFind" Header="_Find" Click="MenuFind_Click" IsEnabled="False"/>
-                        <MenuItem Name="MenuFilter" Header="_Filter" Click="MenuFilter_Click" IsEnabled="False"/>
-                        <Separator/>
-                        <MenuItem Name="MenuExport" Header="_Export" IsEnabled="False">
-                            <MenuItem Name="MenuExportAll" Header="_All Files" Click="MenuExportAll_Click"/>
-                            <MenuItem Name="MenuExportSelected" Header="_Selected File(s)" Click="MenuExportSelected_Click"/>
-                        </MenuItem>
-                        <MenuItem Name="MenuRegister" Header="_Register" IsEnabled="False">
-                            <MenuItem Name="MenuRegisterAll" Header="_All Files" Click="MenuRegisterAll_Click"/>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem Name="MenuCloseCASC" Header="_Close CASC" IsEnabled="False" Click="MenuCloseCASC_Click"/>
-                        <Separator/>
-                        <MenuItem Name="MenuExit" Header="_Exit" Click="MenuExit_Click"/>
-                    </MenuItem>
-                    <MenuItem Header="_Help">
-                        <MenuItem Name="MenuCheckUpdate" Header="_Check for Updates..." Click="MenuCheckUpdate_Click"/>
-                        <Separator/>
-                        <MenuItem Name="MenuAbout" Header="_About" Click="MenuAbout_Click"/>
-                    </MenuItem>
-                </Menu>
-            </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
 
-            <StatusBar DockPanel.Dock="Bottom">
-                <ProgressBar Name="Progress" Width="100" Height="15" />
-                <StatusBarItem>
-                    <TextBlock Name="Status">
-                        Ready
-                    </TextBlock>
-                </StatusBarItem>
-            </StatusBar>
+        <Menu Grid.Row="0" IsMainMenu="True" VerticalAlignment="Top">
+            <MenuItem Name="MenuFile" Header="_File">
+                <MenuItem Name="MenuFileOpen" Header="_Open CASC..." Click="MenuFileOpen_Click"/>
+                <!--<Separator/>-->
+                <!--<MenuItem Name="MenuFileFilter" Header="_Filter" Click="MenuFileFilter_Click"/>-->
+                <Separator/>
+                <MenuItem Name="MenuFileExport" Header="_Export">
+                    <MenuItem Name="MenuFileExportAll" Header="_All Files" Click="MenuFileExportAll_Click"/>
+                    <MenuItem Name="MenuFileExportSelected" Header="_Selected Files" Click="MenuFileExportSelected_Click"/>
+                </MenuItem>
+                <MenuItem Name="MenuFileRegister" Header="_Register">
+                    <MenuItem Name="MenuFileRegisterAll" Header="_All Files" Click="MenuFileRegisterAll_Click"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Name="MenuFileClose" Header="Close CASC" Click="MenuFileClose_Click"/>
+                <Separator/>
+                <MenuItem Name="MenuFileExit" Header="_Exit" Click="MenuFileExit_Click"/>
+            </MenuItem>
+            <MenuItem Name="MenuHelp" Header="_Help">
+                <MenuItem Name="MenuHelpUpdate" Header="_Check for Updates..." Click="MenuHelpUpdate_Click"/>
+                <!--<Separator/>-->
+                <!--<MenuItem Name="MenuHelpAbout" Header="_About" Click="MenuHelpAbout_Click"/>-->
+            </MenuItem>
+        </Menu>
 
-            <ListView Name="FileList" ItemsSource="{Binding CASCFiles}" MouseDoubleClick="FileList_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler" IsEnabled="False">
+        <Grid Grid.Row="1" Margin="0, 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="CASCPath" Grid.Column="0" IsEnabled="False"/>
+            <TextBox Name="FileSearch" TextChanged="FileSearch_TextChanged" Grid.Column="1" Margin="16, 0" adonisExtensions:WatermarkExtension.Watermark="Search CASC"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <ListView Name="FileList" ItemsSource="{Binding Files}" SizeChanged="FileList_Resize" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="FileList_DoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="768" Header="Name" DisplayMemberBinding="{Binding FileName}"/>
-                        <GridViewColumn Width="256" Header="Type" DisplayMemberBinding="{Binding FileType}"/>
-                        <GridViewColumn Width="256" Header="Size" DisplayMemberBinding="{Binding FileSize}"/>
+                        <GridViewColumn Header="Path" Width="Auto" DisplayMemberBinding="{Binding FilePath}"/>
+                        <GridViewColumn Header="Type" Width="Auto" DisplayMemberBinding="{Binding FileType}"/>
+                        <GridViewColumn Header="Size" Width="Auto" DisplayMemberBinding="{Binding FileSize}" adonisExtensions:GridViewSortExtension.PropertyName="FileSizeBytes"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-        </DockPanel>
+        </Grid>
+
+        <StatusBar Grid.Row="3" VerticalAlignment="Bottom" Height="20">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0" Margin="2, 0">
+                <ProgressBar Name="StatusProgress" Width="100" Height="10" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1" HorizontalAlignment="Left">
+                <TextBlock Name="StatusText" Text="Idle" VerticalAlignment="Center"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </adonisControls:AdonisWindow>
